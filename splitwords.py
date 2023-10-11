@@ -24,7 +24,7 @@ def insert_substring(string: str, substring: str, index: int) -> str:
     """
     return string[:index] + substring + string[index:]
 
-if __name__ == '__main__':
+def main(argc: int, argv: list[str]) -> int:
     text = ''.join(fileinput.input())
     
     words_filepath = '/usr/share/dict/words'
@@ -49,3 +49,13 @@ if __name__ == '__main__':
             idx_start += 1
     
     print(text)
+
+    return 0
+
+if __name__ == '__main__':
+    argv = sys.argv
+    argc = len(argv)
+
+    status = main(argc, argv)
+
+    sys.exit(status)

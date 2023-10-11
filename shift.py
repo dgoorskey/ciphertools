@@ -4,16 +4,15 @@ Characters that aren't ascii letters will not be shifted.
 Characters that are ascii letters will have their case preserved.
 """
 
+import sys
 import fileinput
 import string
-import sys
 
-if __name__ == '__main__':
+def main(argc: int, argv: list[str]) -> int:
     upper_alphabet = string.ascii_uppercase
     lower_alphabet = string.ascii_lowercase
 
-    argv = sys.argv
-    argc = len(argv)
+    text = ''.join(fileinput.input(files=argv[3:]))
 
     if '--help' in argv:
         print('Usage: shift.py [SHIFT]')
@@ -29,7 +28,6 @@ if __name__ == '__main__':
         print(f'shift.py: invalid shift, expected an integer, got "{argv[1]}" instead')
         exit(-1)
 
-    text = ''.join(fileinput.input(files=[]))
 
     result = ''
     for c in text:
@@ -45,3 +43,13 @@ if __name__ == '__main__':
         result += c
     
     print(result)
+
+    return 0
+
+if __name__ == '__main__':
+    argv = sys.argv
+    argc = len(argv)
+
+    status = main(argc, argv)
+
+    sys.exit(status)

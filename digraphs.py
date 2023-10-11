@@ -3,9 +3,10 @@ Finds digraph frequencies.
 Reads input from stdin.
 """
 
+import sys
 import fileinput
 
-if __name__ == '__main__':
+def main(argc: int, argv: list[str]) -> int:
     text = ''.join(fileinput.input())
 
     digraphs: dict[str, int] = {}
@@ -30,3 +31,13 @@ if __name__ == '__main__':
             inverse_ratio = digraphs[inverse_digraph] / max_occurrances
             ratio_difference = abs(ratio - inverse_ratio)
         print(f'{digraph[0]}\t{ratio:.2}\t{inverse_ratio:.2}\t{ratio_difference:.2}')
+
+    return 0
+
+if __name__ == '__main__':
+    argv = sys.argv
+    argc = len(argv)
+
+    status = main(argc, argv)
+    
+    sys.exit(status)

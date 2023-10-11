@@ -1,18 +1,7 @@
 import sys
 import fileinput
 
-if __name__ == '__main__':
-    argv = sys.argv
-    argc = len(argv)
-
-    if '--help' in argv:
-        print('Usage: frequencyanalysis.py [TEXT]')
-        sys.exit(0)
-    
-    if '--version' in argv:
-        print('frequencyanalysis 1.0')
-        sys.exit(0)
-
+def main(argc: int, argv: list[str]) -> int:
     text = ''.join(fileinput.input())
 
     characters: dict[str, int] = {}
@@ -27,3 +16,13 @@ if __name__ == '__main__':
 
     for character, occurrances in sorted_characters:
         print(f'{character}\t{occurrances}')
+
+    return 0
+
+if __name__ == '__main__':
+    argv = sys.argv
+    argc = len(argv)
+    
+    status = main(argc, argv)
+
+    sys.exit(status)
